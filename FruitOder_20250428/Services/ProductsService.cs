@@ -10,7 +10,7 @@ namespace FruitOder_20250428.Services
         }
         public async Task<IEnumerable<ProductDto>> GetPopularProductsAsync()
         {
-            var response = await HttpClient.GetAsync("$/popular-products");
+            var response = await HttpClient.GetAsync("/popular-products");
             return await HandlerApiResponseAsync(response, Enumerable.Empty<ProductDto>());
         }
     }

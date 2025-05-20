@@ -7,6 +7,7 @@
              xmlns:models="clr-namespace:FruitOder_20250428.Models"
              xmlns:controls="clr-namespace:FruitOder_20250428.Controls"
              xmlns:converters="clr-namespace:FruitOder_20250428.Converter"
+             xmlns:dto="clr-namespace:FruitOder.Shared.Dtos;assembly=FruitOder.Shared"
              x:DataType="vm:HomePageViewModel">
 
     <ContentPage.Resources>
@@ -44,134 +45,195 @@
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="Margin" Value="0, 1"/>
             </Style>
+            <Style TargetType="Button" x:Key="CartBtn">
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="HeightRequest" Value="30"/>
+                <Setter Property="WidthRequest" Value="35"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid>
-        <VerticalStackLayout Padding="15,20">
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Hi, &#10;"
+    <ScrollView>
+        <Grid>
+            <VerticalStackLayout Padding="15,20">
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Hi, &#10;"
                           TextColor="Black"
                           FontSize="16"
                           FontAttributes="Bold"/>
-                        <Span Text="HungBV!!"
+                            <Span Text="HungBV!!"
                           TextColor="{StaticResource Secondary}"
                           FontSize="20"
                           FontAttributes="Bold"/>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
-            <controls:Spacer Space="10"/>
+                <controls:Spacer Space="10"/>
 
-            <Label Text="Let's order some fruits and vegetables for you!!"
+                <Label Text="Let's order some fruits and vegetables for you!!"
                Style="{StaticResource H4}"
                LineHeight="1"
                TextColor="#FF9B17"
                Opacity="0.8"/>
 
-            <CollectionView ItemsSource="{Binding Offers}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal"
+                <CollectionView ItemsSource="{Binding Offers}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal"
                                    ItemSpacing="10"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Offer">
-                        <Border StrokeShape="RoundRectangle 20"
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Offer">
+                            <Border StrokeShape="RoundRectangle 20"
                             StrokeThickness="0"
                             Background="Transparent"
                             HeightRequest="180"
                             WidthRequest="280">
-                            <Grid>
-                                <BoxView Color="{Binding BgColor, Converter={StaticResource StringToColor}}"/>
-                                <Grid RowDefinitions="Auto, *, Auto"
+                                <Grid>
+                                    <BoxView Color="{Binding BgColor, Converter={StaticResource StringToColor}}"/>
+                                    <Grid RowDefinitions="Auto, *, Auto"
                                   Padding="10">
-                                    <Label Grid.Row="0"
+                                        <Label Grid.Row="0"
                                        Text="{Binding Title, StringFormat='{0} !!!'}"
                                        Style="{StaticResource H5}"/>
-                                    <Label Grid.Row="1"
+                                        <Label Grid.Row="1"
                                        Text="{Binding Description}"
                                        Style="{StaticResource H5}"
                                        VerticalOptions="Center"/>
-                                    <Label Grid.Row="2"
+                                        <Label Grid.Row="2"
                                        Text="{Binding Code}"
                                        Style="{StaticResource H5}"
                                        HorizontalOptions="Center"
                                        BackgroundColor="{StaticResource Primary}"
                                        TextColor="White"
                                        Padding="5,5"/>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-            <controls:Spacer Space="10"/>
+                <controls:Spacer Space="10"/>
 
-            <Label Text="Shop by category"
+                <Label Text="Shop by category"
                Style="{StaticResource H3}"
                TextColor="{StaticResource Secondary}"/>
 
-            <controls:Spacer Space="10"/>
+                <controls:Spacer Space="10"/>
 
-            <CollectionView ItemsSource="{Binding Categories}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal"
+                <CollectionView ItemsSource="{Binding Categories}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal"
                                    ItemSpacing="10"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Category">
-                        <Border StrokeShape="RoundRectangle 5"
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Category">
+                            <Border StrokeShape="RoundRectangle 5"
                             StrokeThickness="0">
-                            <Grid>
-                                <Image Source="{Binding Image}"
+                                <Grid>
+                                    <Image Source="{Binding Image}"
                                    WidthRequest="150"
                                    HeightRequest="180"
                                    Aspect="AspectFill"
                                    VerticalOptions="Center"
                                    HorizontalOptions="Center">
-                                    <Image.Source>
-                                        <UriImageSource Uri="{Binding Image}"
+                                        <Image.Source>
+                                            <UriImageSource Uri="{Binding Image}"
                                                     CachingEnabled="True"/>
-                                    </Image.Source>
-                                </Image>
-                                <Border StrokeShape="RoundRectangle 10"
+                                        </Image.Source>
+                                    </Image>
+                                    <Border StrokeShape="RoundRectangle 10"
                                     StrokeThickness="0"
                                     BackgroundColor="White"
                                     VerticalOptions="End"
                                     Margin="10"
                                     Padding="10">
-                                    <Label Text="{Binding Name}"
+                                        <Label Text="{Binding Name}"
                                        FontAttributes="Bold"
                                        FontSize="16"
                                        HorizontalTextAlignment="Center"
                                        TextColor="#FF9B17"/>
-                                </Border>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-            <controls:Spacer Space="10"/>
+                <controls:Spacer Space="10"/>
 
-            <Label Text="Popular"
+                <Label Text="Popular"
                Style="{StaticResource H3}"/>
-        </VerticalStackLayout>
-        <Grid IsVisible="{Binding IsBusy}">
-            <BoxView Color="{StaticResource Mid}"/>
-            <VerticalStackLayout HorizontalOptions="Center"
+
+                <FlexLayout BindableLayout.ItemsSource="{Binding PopularProducts}"
+                        Wrap="Wrap"
+                            JustifyContent="SpaceEvenly">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="dto:ProductDto">
+                            <Border Padding="10"
+                                    Margin="2"
+                                    BackgroundColor="{StaticResource Mid}"
+                                    FlexLayout.Basis="50%">
+                                <Grid RowDefinitions="175, Auto, Auto, Auto">
+                                    <Image Grid.Row="0"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           HeightRequest="175"/>
+                                    <Label Grid.Row="1"
+                                           Text="{Binding Name}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start"
+                                           FontAttributes="Bold"
+                                           FontSize="16"/>
+                                    <Label Grid.Row="2"
+                                           Text="{Binding Unit}"
+                                           FontSize="13"/>
+                                    <Grid Grid.Row="3"
+                                          ColumnDefinitions="*, 2*">
+                                        <Label Grid.Column="0"
+                                               Text="{Binding Price, StringFormat='${0}'}"/>
+                                        <!--<Button Grid.Column="1"
+                                                Text="Add"/>-->
+                                        <Border Grid.Column="1">
+                                            <Grid ColumnDefinitions="Auto, Auto, Auto">
+                                                <Button Grid.Column="0"
+                                                        Text="-"
+                                                        Style="{StaticResource CartBtn}"/>
+                                                <Label Grid.Column="1"
+                                                    Text="{Binding CartQuantitty}"/>
+                                                <Button Grid.Column="2"
+                                                        Text="+"
+                                                        Style="{StaticResource CartBtn}"/>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+
+            </VerticalStackLayout>
+            <Grid IsVisible="{Binding IsBusy}">
+                <BoxView Color="{StaticResource Mid}"/>
+                <VerticalStackLayout HorizontalOptions="Center"
                                  VerticalOptions="Center">
-                <ActivityIndicator IsRunning="True"
+                    <ActivityIndicator IsRunning="True"
                                    HorizontalOptions="Center"/>
-                <Label Text="Fetching data..."
+                    <Label Text="Fetching data..."
                        TextColor="{StaticResource Tertiary}"
                        HorizontalOptions="Center"
                        FontSize="16"/>
-            </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Grid>
         </Grid>
-    </Grid>
+    </ScrollView>
 </ContentPage>
