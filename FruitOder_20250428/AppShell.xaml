@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="FruitOder_20250428.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:FruitOder_20250428"
+    Shell.FlyoutBehavior="Flyout"
+    Title="FruitOder_20250428"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:pages="clr-namespace:FruitOder_20250428.Pages"
+    Shell.TabBarBackgroundColor="{StaticResource Primary}"
+    Shell.TabBarTitleColor="{StaticResource Black}"
+    Shell.BackgroundColor="{StaticResource Mid}"
+    Shell.ForegroundColor="{StaticResource White}">
+
+    <Shell.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource Primary}"/>
+    </Shell.Behaviors>
+
+    <!--<ShellContent
+        Title="Fruits Oder"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />-->
+    <TabBar>
+        <ShellContent Title="Home"
+                      Icon="home"
+                      ContentTemplate="{DataTemplate pages:HomePage}"
+                      Route="HomePage"/>
+        <ShellContent Title="Categories"
+                      Icon="category"
+                      ContentTemplate="{DataTemplate pages:CategoriesPage}"
+                      Route="CategoriesPage"/>
+        <ShellContent Title="Help"
+                      Icon="help"
+                      ContentTemplate="{DataTemplate pages:HelpPage}"
+                      Route="HelpPage"/>
+        <ShellContent Title="Orders"
+                      Icon="list"
+                      ContentTemplate="{DataTemplate pages:OrdersPage}"
+                      Route="OrdersPage"/>
+        <ShellContent Title="Profile"
+                      Icon="user"
+                      ContentTemplate="{DataTemplate pages:ProfilePage}"
+                      Route="ProfilePage"/>
+    </TabBar>
+    
+</Shell>
